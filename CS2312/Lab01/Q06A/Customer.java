@@ -1,4 +1,4 @@
-// package CS2312.Lab01.Q06A;
+package CS2312.Lab01.Q06A;
 
 public class Customer {
     private int amount;

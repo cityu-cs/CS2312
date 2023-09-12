@@ -1,0 +1,67 @@
+Input the output mode: 
+(Press 1 for console, 2 for output.txt, 3 for dual mode)
+1
+> register r1001 alice child
+Member created!
+> register r1002 bob adult
+Member created!
+> register r1003 cauchy senior
+Member created!
+> searchMember
+ID      Name    Outstanding Fine 
+r1001   alice   0.0
+r1002   bob     0.0
+r1003   cauchy  0.0
+
+> arrive b1001 DiscreteMathematics McGraw
+Book arrived!
+> arrive b1002 ComputerNetwork Tanenbaum
+Book arrived!
+> searchBook     
+CallNo  Title   Authors 
+b1001   DiscreteMathematics     McGraw
+b1002   ComputerNetwork Tanenbaum
+
+> checkout r1001 b1001 08/09/2023
+Book checked out!
+ID      Book    Due date
+r1001   b1001   08/09/2023
+
+> checkin b1001 08/10/2023
+Book returned!
+Before book returned:
+ID      Name    Outstanding Fine
+r1001   alice   0.0
+
+After book returned:
+ID      Name    Outstanding Fine
+r1001   alice   90.0
+
+> pay r1001 50
+Before payment:
+
+ID      Name    Outstanding Fine
+r1001   alice   90.0
+
+After payment
+
+Recharge: 0.0
+ID      Name    Outstanding Fine
+r1001   alice   40.0
+
+> unregister r1003
+Member removed!
+> searchMember
+ID      Name    Outstanding Fine 
+r1001   alice   40.0
+r1002   bob     0.0
+
+> undo
+Member removal undone!
+> searchMember
+ID      Name    Outstanding Fine 
+r1001   alice   40.0
+r1002   bob     0.0
+r1003   cauchy  0.0
+
+> exit

@@ -1,4 +1,4 @@
-// package CS2312.Lab04.Q10;
+package CS2312.Lab04.Q10;
 
 import java.util.Scanner;
 

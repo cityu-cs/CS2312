@@ -1,4 +1,4 @@
-// package CS2312.Lab04.Q02;
+package CS2312.Lab04.Q02;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-// package CS2312.Lab03.Q03;
+package CS2312.Lab03.Q03;
 
 public class Team {
     private Student[] students;

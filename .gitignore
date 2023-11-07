@@ -1,2 +1,13 @@
-CS2312/Lab01/Q04/LibrarySystem/
-*.pdf
+# Distributed materials
+
+CS2312/Lab01/Q04/*
+Labs/*
+Lectures/*
+
+# Java class files
+
+*.class
+
+# Archive files
+
+*.zip

@@ -31,6 +31,23 @@ public class Day implements Cloneable, Comparable<Day> {
         this.day = rhs.day;
     }
 
+    public Day advance(int offset) {
+        /*
+         * Return a new Day object that is (offset - 1) days after this
+         */
+        Day newDay = clone();
+        newDay.day += offset - 1;
+        while (newDay.day > getLengthOfMonth(newDay.year, newDay.month)) {
+            newDay.day -= getLengthOfMonth(newDay.year, newDay.month);
+            newDay.month++;
+            if (newDay.month > 12) {
+                newDay.month = 1;
+                newDay.year++;
+            }
+        }
+        return newDay;
+    }
+
     @Override
     public String toString() {
         return String.format("%d-%s-%04d", day, MONTH_NAMES.substring((month - 1) * 3, month * 3), year);

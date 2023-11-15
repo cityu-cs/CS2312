@@ -1,7 +1,6 @@
 public class SystemDate extends Day {
-    /*
-     * Singleton class
-     */
+    /* Singleton */
+    
     private static SystemDate instance = null;
 
     private SystemDate(String dayString) {

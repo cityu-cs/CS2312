@@ -22,6 +22,12 @@ public class Employee implements Comparable<Employee> {
         throw new ExEmployeeNotFound();
     }
 
+    public static void listEmployees(ArrayList<Employee> employeeList) {
+        for (Employee e : employeeList) {
+            System.out.println(e);
+        }
+    }
+
     @Override
     public String toString() {
         return String.format("%s (Entitled Annual Leaves: %d days)", name, annualLeaves);

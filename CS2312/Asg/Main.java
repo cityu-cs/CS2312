@@ -26,12 +26,11 @@ class Main {
 				tokens[i] = tokens[i].trim();
 			}
 
-			/* undo / redo */
 			if (tokens[0].equals("undo"))
 				RecordedCommand.undoTop();
 			else if (tokens[0].equals("redo"))
 				RecordedCommand.redoTop();
-			/* system commands */
+			/* SystemDate commands */
 			else if (tokens[0].equals("startNewDay"))
 				(new CmdStartNewDay()).execute(tokens);
 			/* Employee commands */
@@ -45,6 +44,12 @@ class Main {
 			else if (tokens[0].equals("listTeams"))
 				(new CmdListTeams()).execute(tokens);
 			/* Project commands */
+			else if (tokens[0].equals("createProject"))
+				(new CmdCreateProject()).execute(tokens);
+			else if (tokens[0].equals("assign"))
+				(new CmdAssign()).execute(tokens);
+			else if (tokens[0].equals("listProjects"))
+				(new CmdListProjects()).execute(tokens);
         }
 
         stdin.close();

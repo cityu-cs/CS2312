@@ -8,14 +8,17 @@ public class Team implements Comparable<Team> {
     public Team(String teamName, Employee head) {
         this.teamName = teamName;
         this.head = head;
-        dateSetup = SystemDate.getInstance().clone();
+        dateSetup = SystemDate.getInstance();
     }
 
-    public static void listTeams(ArrayList<Team> teamList) {
-        System.out.printf("%-15s%-10s%-13s\n", "Team Name", "Leader", "Setup Date");
-        for (Team team : teamList) {
-            System.out.println(team);
-        }
+    public String getNameAndMembers() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(teamName);
+        sb.append(" (");
+        sb.append(head.getName());
+        // TODO: Add other members
+        sb.append(")");
+        return sb.toString();
     }
 
     @Override
@@ -26,5 +29,23 @@ public class Team implements Comparable<Team> {
     @Override
     public int compareTo(Team rhs) {
         return teamName.compareTo(rhs.teamName);
+    }
+
+    /* Static methods */
+
+    public static void listTeams(ArrayList<Team> teamList) {
+        System.out.printf("%-15s%-10s%-13s\n", "Team Name", "Leader", "Setup Date");
+        for (Team t : teamList) {
+            System.out.println(t);
+        }
+    }
+
+    public static Team searchTeam(ArrayList<Team> teamList, String name) throws ExTeamNotFound {
+        for (Team t : teamList) {
+            if (t.teamName.equals(name)) {
+                return t;
+            }
+        }
+        throw new ExTeamNotFound();
     }
 }

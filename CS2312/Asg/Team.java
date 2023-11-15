@@ -11,6 +11,10 @@ public class Team implements Comparable<Team> {
         dateSetup = SystemDate.getInstance();
     }
 
+    public String getTeamName() {
+        return teamName;
+    }
+
     public String getNameAndMembers() {
         StringBuilder sb = new StringBuilder();
         sb.append(teamName);

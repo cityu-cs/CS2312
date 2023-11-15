@@ -8,6 +8,7 @@ public class Company {
     private ArrayList<Team> teamList;
     private ArrayList<Project> projectList;
     private ArrayList<Assignment> assignmentList;
+    private ArrayList<JoinRecord> joinRecordList;
 
     private static Company instance = null;
 
@@ -16,6 +17,7 @@ public class Company {
         teamList = new ArrayList<>();
         projectList = new ArrayList<>();
         assignmentList = new ArrayList<>();
+        joinRecordList = new ArrayList<>();
     }
 
     public static Company getInstance() {
@@ -105,5 +107,19 @@ public class Company {
 
     public Team searchTeamByProject(Project p) throws ExTeamNotFound {
         return Assignment.searchTeamByProject(assignmentList, p);
+    }
+
+    /* JoinRecord methods */
+
+    public void addJoinRecord(JoinRecord jr) {
+        joinRecordList.add(jr);
+    }
+
+    public void removeJoinRecord(JoinRecord jr) {
+        joinRecordList.remove(jr);
+    }
+
+    public Team searchTeamByEmployee(Employee e) throws ExTeamNotFound {
+        return JoinRecord.searchTeamByEmployee(joinRecordList, e);
     }
 }

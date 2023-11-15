@@ -71,6 +71,8 @@ public class Day implements Cloneable, Comparable<Day> {
         return this.day - rhs.day;
     }
 
+    /* Static methods */
+
     static private boolean isLeapYear(int y) {
         if (y % 400 == 0)
             return true;

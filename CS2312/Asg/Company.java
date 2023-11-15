@@ -43,6 +43,10 @@ public class Company {
         return Employee.searchEmployee(employeeList, name);
     }
 
+    public boolean checkEmployeeExists(String name) {
+        return Employee.checkEmployeeExists(employeeList, name);
+    }
+
     /* Team methods */
 
     public void addTeam(Team t) {
@@ -62,6 +66,10 @@ public class Company {
         return Team.searchTeam(teamList, name);
     }
 
+    public boolean checkTeamExists(String name) {
+        return Team.checkTeamExists(teamList, name);
+    }
+
     /* Project methods */
 
     public void addProject(Project p) {
@@ -79,6 +87,10 @@ public class Company {
 
     public Project searchProject(String projectCode) throws ExProjectNotFound {
         return Project.searchProject(projectList, projectCode);
+    }
+
+    public boolean checkProjectExists(String projectCode) {
+        return Project.checkProjectExists(projectList, projectCode);
     }
 
     /* Assignment methods */

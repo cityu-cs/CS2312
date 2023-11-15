@@ -2,22 +2,32 @@ public class CmdSetupTeam extends RecordedCommand {
     private Team t;
 
     @Override
-    public void executeThis(String[] tokens) {
+    public void execute(String[] tokens) {
         /*
          * Usage: setupTeam <team name> <team head name>
          */
         try {
             if (tokens.length < 3)
                 throw new ExInsufficientCommandArguments();
+            
             Company company = Company.getInstance();
+            if (company.checkTeamExists(tokens[1]))
+                throw new ExTeamAlreadyExists();
             t = new Team(
                 tokens[1],
                 company.searchEmployee(tokens[2])
             );
             company.addTeam(t);
-        } catch (ExEmployeeNotFound e) {
+
+            RecordedCommand.addToUndoList(this);
+            RecordedCommand.clearRedoList();
+            System.out.println("Done.");
+            
+        }catch (ExInsufficientCommandArguments e) {
             System.out.println(e.getMessage());
-        } catch (ExInsufficientCommandArguments e) {
+        } catch (ExTeamAlreadyExists e) {
+            System.out.println(e.getMessage());
+        } catch (ExEmployeeNotFound e) {
             System.out.println(e.getMessage());
         }
     }

@@ -48,4 +48,13 @@ public class Team implements Comparable<Team> {
         }
         throw new ExTeamNotFound();
     }
+
+    public static boolean checkTeamExists(ArrayList<Team> teamList, String name) {
+        for (Team t : teamList) {
+            if (t.teamName.equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

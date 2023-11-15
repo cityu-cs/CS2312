@@ -13,6 +13,24 @@ public class Employee implements Comparable<Employee> {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s (Entitled Annual Leaves: %d days)", name, annualLeaves);
+    }
+
+    @Override
+    public int compareTo(Employee rhs) {
+        return this.name.compareTo(rhs.name);
+    }
+
+    /* Static methods */
+
+    public static void listEmployees(ArrayList<Employee> employeeList) {
+        for (Employee e : employeeList) {
+            System.out.println(e);
+        }
+    }
+
     public static Employee searchEmployee(ArrayList<Employee> employeeList, String name) throws ExEmployeeNotFound {
         for (Employee e : employeeList) {
             if (e.getName().equals(name)) {
@@ -22,19 +40,12 @@ public class Employee implements Comparable<Employee> {
         throw new ExEmployeeNotFound();
     }
 
-    public static void listEmployees(ArrayList<Employee> employeeList) {
+    public static boolean checkEmployeeExists(ArrayList<Employee> employeeList, String name) {
         for (Employee e : employeeList) {
-            System.out.println(e);
+            if (e.getName().equals(name)) {
+                return true;
+            }
         }
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s (Entitled Annual Leaves: %d days)", name, annualLeaves);
-    }
-
-    @Override
-    public int compareTo(Employee rhs) {
-        return this.name.compareTo(rhs.name);
+        return false;
     }
 }

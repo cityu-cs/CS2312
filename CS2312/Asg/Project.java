@@ -46,4 +46,13 @@ public class Project implements Comparable<Project> {
         }
         throw new ExProjectNotFound();
     }
+
+    public static boolean checkProjectExists(ArrayList<Project> projectList, String code) {
+        for (Project p : projectList) {
+            if (p.projectCode.equals(code)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -1,6 +1,5 @@
 # Distributed materials
 
-CS2312/Lab01/Q04/*
 Labs/*
 Lectures/*
 
@@ -8,6 +7,11 @@ Lectures/*
 
 *.class
 
-# Archive files
+# Testing
 
+*.out
+
+# Archives
+
+*.jar
 *.zip

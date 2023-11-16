@@ -113,16 +113,34 @@ public class Company {
 
     /* EmployeeTeamRelation methods */
 
-    public void addJoinRecord(EmployeeTeamRelation etr) {
+    public void addEmployeeTeamRelation(EmployeeTeamRelation etr) {
         EmployeeTeamRelationList.add(etr);
+        Collections.sort(EmployeeTeamRelationList);
     }
 
-    public void removeJoinRecord(EmployeeTeamRelation etr) {
+    public void addEmployeeTeamRelations(ArrayList<EmployeeTeamRelation> etrList) {
+        EmployeeTeamRelationList.addAll(etrList);
+        Collections.sort(EmployeeTeamRelationList);
+    }
+
+    public void removeEmployeeTeamRelation(EmployeeTeamRelation etr) {
         EmployeeTeamRelationList.remove(etr);
+    }
+
+    public void removeEmployeeTeamRelations(ArrayList<EmployeeTeamRelation> etrList) {
+        EmployeeTeamRelationList.removeAll(etrList);
+    }
+
+    public void listTeamMembers(Team t) {
+        EmployeeTeamRelation.listTeamMembers(EmployeeTeamRelationList, t);
     }
 
     public Team searchTeamByEmployee(Employee e) throws ExTeamNotFound {
         return EmployeeTeamRelation.searchTeamByEmployee(EmployeeTeamRelationList, e);
+    }
+
+    public ArrayList<EmployeeTeamRelation> searchEmployeesByTeam(Team t) {
+        return EmployeeTeamRelation.searchEmployeesByTeam(EmployeeTeamRelationList, t);
     }
 
     /* LeaveRecord methods */
@@ -136,8 +154,8 @@ public class Company {
         leaveRecordList.remove(lr);
     }
 
-    public ArrayList<LeaveRecord> searchLeaveRecordByEmployee(Employee e) {
-        return LeaveRecord.searchLeaveRecordByEmployee(leaveRecordList, e);
+    public ArrayList<LeaveRecord> searchLeaveRecord(Employee e) {
+        return LeaveRecord.searchLeaveRecord(leaveRecordList, e);
     }
 
     public void listLeaveRecordByEmployee(String name) throws ExEmployeeNotFound {

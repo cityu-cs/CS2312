@@ -1,7 +1,9 @@
+import java.util.ArrayList;
+
 public class CmdSetupTeam extends RecordedCommand {
     private Team t;
     private Employee head;
-    private EmployeeTeamRelation etr;
+    private ArrayList<EmployeeTeamRelation> etrList = null;
 
     @Override
     public void execute(String[] tokens) {
@@ -16,16 +18,18 @@ public class CmdSetupTeam extends RecordedCommand {
             if (company.checkTeamExists(tokens[1]))
                 throw new ExTeamAlreadyExists();
             head = company.searchEmployee(tokens[2]);
+
             try {
                 Team anotherTeam = company.searchTeamByEmployee(head);
                 throw new ExEmployeeHasJoinedAnotherTeam(head.getName(), anotherTeam.getTeamName());
             } catch (ExTeamNotFound e) {
                 // do nothing
             }
+            
             t = new Team(tokens[1], head);
             company.addTeam(t);
-            etr = new EmployeeTeamRelation(head, t);
-            company.addJoinRecord(etr);
+            EmployeeTeamRelation etr = new EmployeeTeamRelation(head, t, new RLeader());
+            company.addEmployeeTeamRelation(etr);
 
             RecordedCommand.addToUndoList(this);
             RecordedCommand.clearRedoList();
@@ -45,14 +49,15 @@ public class CmdSetupTeam extends RecordedCommand {
     @Override
     public void undoThis() {
         Company company = Company.getInstance();
+        etrList = company.searchEmployeesByTeam(t);
+        company.removeEmployeeTeamRelations(etrList);
         company.removeTeam(t);
-        company.removeJoinRecord(etr);
     }
 
     @Override
     public void redoThis() {
         Company company = Company.getInstance();
         company.addTeam(t);
-        company.addJoinRecord(etr);
+        company.addEmployeeTeamRelations(etrList);
     }
 }

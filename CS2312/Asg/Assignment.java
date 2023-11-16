@@ -9,6 +9,8 @@ public class Assignment {
         this.team = team;
     }
 
+    /* Static methods */
+
     public static Team searchTeamByProject(ArrayList<Assignment> assignmentList, Project project) throws ExTeamNotFound {
         for (Assignment a : assignmentList) {
             if (a.project.equals(project)) {

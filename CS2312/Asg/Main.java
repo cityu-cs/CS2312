@@ -45,6 +45,10 @@ class Main {
 					(new CmdSetupTeam()).execute(tokens);
 				else if (tokens[0].equals("listTeams"))
 					(new CmdListTeams()).execute(tokens);
+				else if (tokens[0].equals("joinTeam"))
+					(new CmdJoinTeam()).execute(tokens);
+				else if (tokens[0].equals("listTeamMembers"))
+					(new CmdListTeamMembers()).execute(tokens);
 				/* Project commands */
 				else if (tokens[0].equals("createProject"))
 					(new CmdCreateProject()).execute(tokens);

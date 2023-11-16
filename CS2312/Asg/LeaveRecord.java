@@ -26,17 +26,7 @@ public class LeaveRecord implements Comparable<LeaveRecord> {
 
     /* Static methods */
 
-    public static ArrayList<LeaveRecord> searchLeaveRecordByEmployee(ArrayList<LeaveRecord> leaveRecordList, Employee employee) {
-        ArrayList<LeaveRecord> result = new ArrayList<>();
-        for (LeaveRecord lr : leaveRecordList) {
-            if (lr.employee.equals(employee)) {
-                result.add(lr);
-            }
-        }
-        return result;
-    }
-
-    public static ArrayList<LeaveRecord> searchCurrentFutureLeaveRecordByEmployee(ArrayList<LeaveRecord> leaveRecordList, Employee employee) {
+    public static ArrayList<LeaveRecord> searchLeaveRecord(ArrayList<LeaveRecord> leaveRecordList, Employee employee) {
         Day systemDate = SystemDate.getInstance();
         ArrayList<LeaveRecord> result = new ArrayList<>();
         for (LeaveRecord lr : leaveRecordList) {
@@ -49,7 +39,7 @@ public class LeaveRecord implements Comparable<LeaveRecord> {
 
     public static void listLeaveRecordByEmployee(ArrayList<LeaveRecord> leaveRecordList, Employee employee) {
         System.out.printf("%s: ", employee.getName());
-        ArrayList<LeaveRecord> result = searchCurrentFutureLeaveRecordByEmployee(leaveRecordList, employee);
+        ArrayList<LeaveRecord> result = searchLeaveRecord(leaveRecordList, employee);
         if (result.size() == 0) {
             System.out.println("--");
         } else {

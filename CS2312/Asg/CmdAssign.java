@@ -7,8 +7,9 @@ public class CmdAssign extends RecordedCommand {
          * Usage: assign <project code> <team name>
          */
         try {
-            if (tokens.length < 3)
+            if (tokens.length < 3) {
                 throw new ExInsufficientCommandArguments();
+            }
             
             Company company = Company.getInstance();
             Project project = company.searchProject(tokens[1]);

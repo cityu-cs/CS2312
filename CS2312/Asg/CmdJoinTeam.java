@@ -7,9 +7,10 @@ public class CmdJoinTeam extends RecordedCommand {
          * Usage: joinTeam <employee name> <team name>
          */
         try {
-            if (tokens.length < 3)
+            if (tokens.length < 3) {
                 throw new ExInsufficientCommandArguments();
-            
+            }
+
             Company company = Company.getInstance();
             Employee employee = company.searchEmployee(tokens[1]);
 
@@ -27,6 +28,7 @@ public class CmdJoinTeam extends RecordedCommand {
             RecordedCommand.addToUndoList(this);
             RecordedCommand.clearRedoList();
             System.out.println("Done.");
+            
         } catch (ExInsufficientCommandArguments e) {
             System.out.println(e.getMessage());
         } catch (ExEmployeeNotFound e) {

@@ -10,10 +10,11 @@ public class CmdListLeaves implements Command {
          */
         Company company = Company.getInstance();
         try {
-            if (tokens.length == 1)
+            if (tokens.length == 1) {
                 company.listAllLeaveRecords();
-            else
-                company.listLeaveRecordByEmployee(tokens[1]);
+            } else {
+                company.listLeaveRecordsByEmployee(tokens[1]);
+            }
         } catch (ExEmployeeNotFound e) {
             System.out.println(e.getMessage());
         }

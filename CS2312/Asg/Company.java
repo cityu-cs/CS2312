@@ -23,8 +23,9 @@ public class Company {
     }
 
     public static Company getInstance() {
-        if (instance == null)
+        if (instance == null) {
             instance = new Company();
+        }
         return instance;
     }
 
@@ -154,21 +155,21 @@ public class Company {
         leaveRecordList.remove(lr);
     }
 
-    public ArrayList<LeaveRecord> searchLeaveRecord(Employee e) {
-        return LeaveRecord.searchLeaveRecord(leaveRecordList, e);
+    public ArrayList<LeaveRecord> searchLeaveRecords(Employee e) {
+        return LeaveRecord.searchLeaveRecords(leaveRecordList, e);
     }
 
-    public void listLeaveRecordByEmployee(String name) throws ExEmployeeNotFound {
+    public void listLeaveRecordsByEmployee(String name) throws ExEmployeeNotFound {
         Employee e = searchEmployee(name);
-        LeaveRecord.listLeaveRecordByEmployee(leaveRecordList, e);
+        LeaveRecord.listLeaveRecordsByEmployee(leaveRecordList, e);
     }
 
     public void listAllLeaveRecords() {
         LeaveRecord.listAllLeaveRecords(leaveRecordList, employeeList);
     }
 
-    public LeaveRecord getOverlapLeaveRecord(Employee e, Day startDay, Day endDay) {
-        return LeaveRecord.getOverlapLeaveRecord(leaveRecordList, e, startDay, endDay);
+    public LeaveRecord searchOverlapLeaveRecord(Employee e, Day startDay, Day endDay) {
+        return LeaveRecord.searchOverlapLeaveRecord(leaveRecordList, e, startDay, endDay);
     }
 
     public int getAnnualLeaveBalance(Employee e) {

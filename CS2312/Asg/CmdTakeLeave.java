@@ -7,21 +7,24 @@ public class CmdTakeLeave extends RecordedCommand {
          * Usage: takeLeave <employee name> <start date: day> <end date: day>
          */
         try {
-            if (tokens.length < 4)
+            if (tokens.length < 4) {
                 throw new ExInsufficientCommandArguments();
+            }
 
             Company company = Company.getInstance();
             Employee employee = company.searchEmployee(tokens[1]);
             Day startDay = new Day(tokens[2]);
             Day endDay = new Day(tokens[3]);
             int interval = Day.daysBetween(startDay, endDay);
-            LeaveRecord OverlapLeaveRecord = company.getOverlapLeaveRecord(employee, startDay, endDay);
+            LeaveRecord OverlapLeaveRecord = company.searchOverlapLeaveRecord(employee, startDay, endDay);
             int balance = company.getAnnualLeaveBalance(employee);
 
-            if (balance < interval)
+            if (balance < interval) {
                 throw new ExInsufficientBalanceOfAnnualLeave(balance);
-            if (OverlapLeaveRecord != null)
+            }
+            if (OverlapLeaveRecord != null) {
                 throw new ExLeaveOverlapped(OverlapLeaveRecord);
+            }
 
             leaveRecord = new LeaveRecord(employee, startDay, endDay);
             company.addLeaveRecord(leaveRecord);

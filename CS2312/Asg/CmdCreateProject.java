@@ -7,12 +7,15 @@ public class CmdCreateProject extends RecordedCommand {
          * Usage: createProject <project code> <start day: day> <duration: int>
          */
         try {
-            if (tokens.length < 4)
+            if (tokens.length < 4) {
                 throw new ExInsufficientCommandArguments();
-            
+            }
+
             Company company = Company.getInstance();
-            if (company.checkProjectExists(tokens[1]))
+            if (company.checkProjectExists(tokens[1])) {
                 throw new ExProjectAlreadyExists();
+            }
+            
             Day startDay = new Day(tokens[2]);
             int duration = Integer.parseInt(tokens[3]);
             Day endDay = startDay.advance(duration);

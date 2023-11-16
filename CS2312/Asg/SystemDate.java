@@ -8,10 +8,11 @@ public class SystemDate extends Day {
     }
 
     public static void createInstance(String dayString) {
-        if (instance == null)
+        if (instance == null) {
             instance = new SystemDate(dayString);
-        else
+        } else {
             System.out.println("Cannot create one more system date instance.");
+        }
     }
 
     public static void setDay(Day dayObject) {

@@ -8,8 +8,9 @@ public class CmdStartNewDay extends RecordedCommand {
          * Usage: startNewDay <date: day>
          */
         try {
-            if (tokens.length != 2)
+            if (tokens.length != 2) {
                 throw new ExInsufficientCommandArguments();
+            }
             
             oldDay = SystemDate.getInstance();
             newDay = new Day(tokens[1]);

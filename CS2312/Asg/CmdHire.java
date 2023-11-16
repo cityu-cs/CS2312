@@ -7,12 +7,15 @@ public class CmdHire extends RecordedCommand {
          * Usage: hire <name> <annual leaves: int>
          */
         try {
-            if (tokens.length < 3)
+            if (tokens.length < 3) {
                 throw new ExInsufficientCommandArguments();
-            
+            }
+
             Company company = Company.getInstance();
-            if (company.checkEmployeeExists(tokens[1]))
+            if (company.checkEmployeeExists(tokens[1])) {
                 throw new ExEmployeeAlreadyExists();
+            }
+            
             e = new Employee(tokens[1], Integer.parseInt(tokens[2]));
             company.addEmployee(e);
 

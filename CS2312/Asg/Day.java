@@ -64,28 +64,34 @@ public class Day implements Cloneable, Comparable<Day> {
 
     @Override
     public int compareTo(Day rhs) {
-        if (this.year != rhs.year)
+        if (this.year != rhs.year) {
             return this.year - rhs.year;
-        if (this.month != rhs.month)
+        }
+        if (this.month != rhs.month) {
             return this.month - rhs.month;
+        }
         return this.day - rhs.day;
     }
 
     /* Static methods */
 
     static private boolean isLeapYear(int y) {
-        if (y % 400 == 0)
+        if (y % 400 == 0) {
             return true;
-        if (y % 100 == 0)
+        }
+        if (y % 100 == 0) {
             return false;
+        }
         return y % 4 == 0;
     }
 
     static private int getLengthOfMonth(int y, int m) {
-        if (m == 2)
+        if (m == 2) {
             return isLeapYear(y) ? 29 : 28;
-        if (m <= 7)
+        }
+        if (m <= 7) {
             return m % 2 == 1 ? 31 : 30; // 1, 3, 5, 7 -> 31; 2, 4, 6 -> 30
+        }
         return m % 2 == 1 ? 30 : 31; // 8, 10, 12 -> 31; 9, 11 -> 30
     }
 
@@ -101,17 +107,21 @@ public class Day implements Cloneable, Comparable<Day> {
         }
         if (from.year != to.year) {
             length += getLengthOfMonth(from.year, from.month) - from.day + 1;
-            for (int month = from.month + 1; month <= 12; month++)
+            for (int month = from.month + 1; month <= 12; month++) {
                 length += getLengthOfMonth(from.year, month);
-            for (int year = from.year + 1; year < to.year; year++)
+            }
+            for (int year = from.year + 1; year < to.year; year++) {
                 length += isLeapYear(year) ? 366 : 365;
-            for (int month = 1; month < to.month; month++)
+            }
+            for (int month = 1; month < to.month; month++) {
                 length += getLengthOfMonth(to.year, month);
+            }
             length += to.day;
         } else if (from.month != to.month) {
             length += getLengthOfMonth(from.year, from.month) - from.day + 1;
-            for (int month = from.month + 1; month < to.month; month++)
+            for (int month = from.month + 1; month < to.month; month++) {
                 length += getLengthOfMonth(from.year, month);
+            }
             length += to.day;
         } else {
             length = to.day - from.day + 1;

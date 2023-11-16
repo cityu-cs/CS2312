@@ -65,8 +65,9 @@ class Main {
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found!");
 		} finally {
-			if (filein != null)
+			if (filein != null) {
 				filein.close();
+			}
 			stdin.close();
 		}
     }

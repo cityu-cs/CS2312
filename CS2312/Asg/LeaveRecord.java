@@ -18,15 +18,16 @@ public class LeaveRecord implements Comparable<LeaveRecord> {
 
     @Override
     public int compareTo(LeaveRecord rhs) {
-        if (this.employee.equals(rhs.employee))
+        if (this.employee.equals(rhs.employee)) {
             return this.startDay.compareTo(rhs.startDay);
-        else
+        } else {
             return this.employee.compareTo(rhs.employee);
+        }
     }
 
     /* Static methods */
 
-    public static ArrayList<LeaveRecord> searchLeaveRecord(ArrayList<LeaveRecord> leaveRecordList, Employee employee) {
+    public static ArrayList<LeaveRecord> searchLeaveRecords(ArrayList<LeaveRecord> leaveRecordList, Employee employee) {
         Day systemDate = SystemDate.getInstance();
         ArrayList<LeaveRecord> result = new ArrayList<>();
         for (LeaveRecord lr : leaveRecordList) {
@@ -37,9 +38,9 @@ public class LeaveRecord implements Comparable<LeaveRecord> {
         return result;
     }
 
-    public static void listLeaveRecordByEmployee(ArrayList<LeaveRecord> leaveRecordList, Employee employee) {
+    public static void listLeaveRecordsByEmployee(ArrayList<LeaveRecord> leaveRecordList, Employee employee) {
         System.out.printf("%s: ", employee.getName());
-        ArrayList<LeaveRecord> result = searchLeaveRecord(leaveRecordList, employee);
+        ArrayList<LeaveRecord> result = searchLeaveRecords(leaveRecordList, employee);
         if (result.size() == 0) {
             System.out.println("--");
         } else {
@@ -53,15 +54,16 @@ public class LeaveRecord implements Comparable<LeaveRecord> {
 
     public static void listAllLeaveRecords(ArrayList<LeaveRecord> leaveRecordList, ArrayList<Employee> employeeList) {
         for (Employee e : employeeList) {
-            listLeaveRecordByEmployee(leaveRecordList, e);
+            listLeaveRecordsByEmployee(leaveRecordList, e);
         }
     }
 
-    public static LeaveRecord getOverlapLeaveRecord(ArrayList<LeaveRecord> leaveRecordList, Employee employee, Day startDay, Day endDay) {
+    public static LeaveRecord searchOverlapLeaveRecord(ArrayList<LeaveRecord> leaveRecordList, Employee employee, Day startDay, Day endDay) {
         for (LeaveRecord lr : leaveRecordList) {
             if (lr.employee.equals(employee)) {
-                if (lr.startDay.compareTo(endDay) <= 0 && startDay.compareTo(lr.endDay) <= 0)
+                if (lr.startDay.compareTo(endDay) <= 0 && startDay.compareTo(lr.endDay) <= 0) {
                     return lr;
+                }
             }
         }
         return null;

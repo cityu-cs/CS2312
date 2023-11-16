@@ -15,10 +15,11 @@ public class CmdSetupTeam extends RecordedCommand {
                 throw new ExInsufficientCommandArguments();
             
             Company company = Company.getInstance();
-            if (company.checkTeamExists(tokens[1]))
+            if (company.checkTeamExists(tokens[1])) {
                 throw new ExTeamAlreadyExists();
+            }
+            
             head = company.searchEmployee(tokens[2]);
-
             try {
                 Team anotherTeam = company.searchTeamByEmployee(head);
                 throw new ExEmployeeHasJoinedAnotherTeam(head.getName(), anotherTeam.getTeamName());

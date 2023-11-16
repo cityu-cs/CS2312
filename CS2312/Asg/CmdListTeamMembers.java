@@ -5,9 +5,9 @@ public class CmdListTeamMembers implements Command {
          * Usage: listTeamMembers <team name>
          */
         try {
-            if (tokens.length < 2)
+            if (tokens.length < 2) {
                 throw new ExInsufficientCommandArguments();
-            
+            }
             Company company = Company.getInstance();
             Team team = company.searchTeam(tokens[1]);
             company.listTeamMembers(team);

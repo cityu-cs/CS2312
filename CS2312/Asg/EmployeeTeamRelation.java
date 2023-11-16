@@ -14,7 +14,7 @@ public class EmployeeTeamRelation implements Comparable<EmployeeTeamRelation> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        ArrayList<LeaveRecord> leaveRecordList = Company.getInstance().searchLeaveRecord(employee);
+        ArrayList<LeaveRecord> leaveRecordList = Company.getInstance().searchLeaveRecords(employee);
         if (leaveRecordList.size() == 0) {
             sb.append("--");
         } else {

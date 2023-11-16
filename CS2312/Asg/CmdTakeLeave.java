@@ -7,7 +7,7 @@ public class CmdTakeLeave extends RecordedCommand {
          * Usage: takeLeave <employee name> <start date: day> <end date: day>
          */
         try {
-            if (tokens.length < 3)
+            if (tokens.length < 4)
                 throw new ExInsufficientCommandArguments();
 
             Company company = Company.getInstance();

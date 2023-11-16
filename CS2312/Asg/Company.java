@@ -8,7 +8,7 @@ public class Company {
     private ArrayList<Team> teamList;
     private ArrayList<Project> projectList;
     private ArrayList<Assignment> assignmentList;
-    private ArrayList<JoinRecord> joinRecordList;
+    private ArrayList<EmployeeTeamRelation> EmployeeTeamRelationList;
     private ArrayList<LeaveRecord> leaveRecordList;
 
     private static Company instance = null;
@@ -18,7 +18,7 @@ public class Company {
         teamList = new ArrayList<>();
         projectList = new ArrayList<>();
         assignmentList = new ArrayList<>();
-        joinRecordList = new ArrayList<>();
+        EmployeeTeamRelationList = new ArrayList<>();
         leaveRecordList = new ArrayList<>();
     }
 
@@ -111,18 +111,18 @@ public class Company {
         return Assignment.searchTeamByProject(assignmentList, p);
     }
 
-    /* JoinRecord methods */
+    /* EmployeeTeamRelation methods */
 
-    public void addJoinRecord(JoinRecord jr) {
-        joinRecordList.add(jr);
+    public void addJoinRecord(EmployeeTeamRelation etr) {
+        EmployeeTeamRelationList.add(etr);
     }
 
-    public void removeJoinRecord(JoinRecord jr) {
-        joinRecordList.remove(jr);
+    public void removeJoinRecord(EmployeeTeamRelation etr) {
+        EmployeeTeamRelationList.remove(etr);
     }
 
     public Team searchTeamByEmployee(Employee e) throws ExTeamNotFound {
-        return JoinRecord.searchTeamByEmployee(joinRecordList, e);
+        return EmployeeTeamRelation.searchTeamByEmployee(EmployeeTeamRelationList, e);
     }
 
     /* LeaveRecord methods */

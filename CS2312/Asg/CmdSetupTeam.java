@@ -1,7 +1,7 @@
 public class CmdSetupTeam extends RecordedCommand {
     private Team t;
     private Employee head;
-    private JoinRecord jr;
+    private EmployeeTeamRelation etr;
 
     @Override
     public void execute(String[] tokens) {
@@ -24,8 +24,8 @@ public class CmdSetupTeam extends RecordedCommand {
             }
             t = new Team(tokens[1], head);
             company.addTeam(t);
-            jr = new JoinRecord(head, t);
-            company.addJoinRecord(jr);
+            etr = new EmployeeTeamRelation(head, t);
+            company.addJoinRecord(etr);
 
             RecordedCommand.addToUndoList(this);
             RecordedCommand.clearRedoList();
@@ -46,13 +46,13 @@ public class CmdSetupTeam extends RecordedCommand {
     public void undoThis() {
         Company company = Company.getInstance();
         company.removeTeam(t);
-        company.removeJoinRecord(jr);
+        company.removeJoinRecord(etr);
     }
 
     @Override
     public void redoThis() {
         Company company = Company.getInstance();
         company.addTeam(t);
-        company.addJoinRecord(jr);
+        company.addJoinRecord(etr);
     }
 }

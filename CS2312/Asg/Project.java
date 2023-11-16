@@ -4,11 +4,31 @@ public class Project implements Comparable<Project> {
     private String projectCode;
     private Day startDay;
     private Day endDay;
+    private static final int FINAL_STAGE_DURATION = 5;
 
     public Project(String projectCode, Day startDay, Day endDay) {
         this.projectCode = projectCode;
         this.startDay = startDay;
         this.endDay = endDay;
+    }
+
+    public String getProjectCode() {
+        return projectCode;
+    }
+
+    public Day getFinalStageStartDay() {
+        if (Day.daysBetween(startDay, endDay) <= FINAL_STAGE_DURATION) {
+            return startDay;
+        }
+        return endDay.advance(-FINAL_STAGE_DURATION);
+    }
+
+    public Day getFinalStageEndDay() {
+        return endDay;
+    }
+
+    public boolean checkLeaveOverlapWithFinalStage(Day leaveStartDay, Day leaveEndDay) {
+        return Day.checkOverlap(leaveStartDay, leaveEndDay, getFinalStageStartDay(), endDay);
     }
 
     @Override
@@ -17,7 +37,7 @@ public class Project implements Comparable<Project> {
         String teamAndMembers = null;
         try {
             Team team = company.searchTeamByProject(this);
-            teamAndMembers = team.getNameAndMembers();
+            teamAndMembers = company.formatTeamAndMembers(team);
         } catch (ExTeamNotFound e) {
             teamAndMembers = "--";
         }

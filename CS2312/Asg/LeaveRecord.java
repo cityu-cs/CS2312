@@ -58,16 +58,15 @@ public class LeaveRecord implements Comparable<LeaveRecord> {
         }
     }
 
-    public static LeaveRecord searchOverlapLeaveRecord(ArrayList<LeaveRecord> leaveRecordList, Employee employee, Day startDay, Day endDay) {
+    public static void checkOverlapLeaveRecords(ArrayList<LeaveRecord> leaveRecordList, Employee e, Day startDay, Day endDay)
+            throws ExLeaveOverlapped {
         for (LeaveRecord lr : leaveRecordList) {
-            if (lr.employee.equals(employee)) {
-                if (lr.startDay.compareTo(endDay) <= 0 && startDay.compareTo(lr.endDay) <= 0) {
-                    return lr;
-                }
+            if (lr.employee.equals(e) && Day.checkOverlap(startDay, endDay, lr.startDay, lr.endDay)) {
+                throw new ExLeaveOverlapped();
             }
         }
-        return null;
     }
+
 
     public static int getAnnualLeaveBalance(ArrayList<LeaveRecord> leaveRecordList, Employee employee) {
         int balance = employee.getAnnualLeaves();

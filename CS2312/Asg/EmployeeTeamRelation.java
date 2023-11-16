@@ -63,4 +63,18 @@ public class EmployeeTeamRelation implements Comparable<EmployeeTeamRelation> {
         }
         return result;
     }
+
+    public static String formatTeamAndMembers(ArrayList<EmployeeTeamRelation> EmployeeTeamRelationList, Team team) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(team.getTeamName()).append(" (");
+        ArrayList<EmployeeTeamRelation> result = searchEmployeesByTeam(EmployeeTeamRelationList, team);
+        for (int i = 0; i < result.size(); i++) {
+            sb.append(result.get(i).employee.getName());
+            if (i != result.size() - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append(")");
+        return sb.toString();
+    }
 }

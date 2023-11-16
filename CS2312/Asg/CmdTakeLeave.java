@@ -16,14 +16,12 @@ public class CmdTakeLeave extends RecordedCommand {
             Day startDay = new Day(tokens[2]);
             Day endDay = new Day(tokens[3]);
             int interval = Day.daysBetween(startDay, endDay);
-            LeaveRecord OverlapLeaveRecord = company.searchOverlapLeaveRecord(employee, startDay, endDay);
-            int balance = company.getAnnualLeaveBalance(employee);
+            company.checkOverlapLeaveRecords(employee, startDay, endDay); // may throw ExLeaveOverlapped
+            company.checkProjectFinalStage(employee, startDay, endDay); // may throw ExLeaveInFinalStage
 
+            int balance = company.getAnnualLeaveBalance(employee);
             if (balance < interval) {
                 throw new ExInsufficientBalanceOfAnnualLeave(balance);
-            }
-            if (OverlapLeaveRecord != null) {
-                throw new ExLeaveOverlapped(OverlapLeaveRecord);
             }
 
             leaveRecord = new LeaveRecord(employee, startDay, endDay);
@@ -42,6 +40,8 @@ public class CmdTakeLeave extends RecordedCommand {
         } catch (ExInsufficientBalanceOfAnnualLeave e) {
             System.out.println(e.getMessage());
         } catch (ExLeaveOverlapped e) {
+            System.out.println(e.getMessage());
+        } catch (ExLeaveInFinalStage e) {
             System.out.println(e.getMessage());
         }
     }

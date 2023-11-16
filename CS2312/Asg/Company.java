@@ -112,6 +112,15 @@ public class Company {
         return Assignment.searchTeamByProject(assignmentList, p);
     }
 
+    public void checkProjectFinalStage(Employee e, Day startDay, Day endDay) throws ExLeaveInFinalStage {
+        try {
+            Team t = searchTeamByEmployee(e);
+            Assignment.checkProjectFinalStage(assignmentList, t, startDay, endDay);
+        } catch (ExTeamNotFound ex) {
+            return; // no team means no project
+        }
+    }
+
     /* EmployeeTeamRelation methods */
 
     public void addEmployeeTeamRelation(EmployeeTeamRelation etr) {
@@ -144,6 +153,10 @@ public class Company {
         return EmployeeTeamRelation.searchEmployeesByTeam(EmployeeTeamRelationList, t);
     }
 
+    public String formatTeamAndMembers(Team team) {
+        return EmployeeTeamRelation.formatTeamAndMembers(EmployeeTeamRelationList, team);
+    }
+
     /* LeaveRecord methods */
 
     public void addLeaveRecord(LeaveRecord lr) {
@@ -168,8 +181,8 @@ public class Company {
         LeaveRecord.listAllLeaveRecords(leaveRecordList, employeeList);
     }
 
-    public LeaveRecord searchOverlapLeaveRecord(Employee e, Day startDay, Day endDay) {
-        return LeaveRecord.searchOverlapLeaveRecord(leaveRecordList, e, startDay, endDay);
+    public void checkOverlapLeaveRecords(Employee e, Day startDay, Day endDay) throws ExLeaveOverlapped {
+        LeaveRecord.checkOverlapLeaveRecords(leaveRecordList, e, startDay, endDay);
     }
 
     public int getAnnualLeaveBalance(Employee e) {

@@ -16,3 +16,7 @@ Assignment/*
 
 *.jar
 *.zip
+
+# Editor files
+
+CS2312/Asg/.vscode/*

@@ -33,19 +33,34 @@ public class Day implements Cloneable, Comparable<Day> {
 
     public Day advance(int offset) {
         /*
-         * Return a new Day object that is (offset - 1) days after this
+         * If offset > 0, return this day advanced by (offset-1) days
+         * If offset < 0, return this day retarded by (offset+1) days
          */
         Day newDay = clone();
-        newDay.day += offset - 1;
-        while (newDay.day > getLengthOfMonth(newDay.year, newDay.month)) {
-            newDay.day -= getLengthOfMonth(newDay.year, newDay.month);
-            newDay.month++;
-            if (newDay.month > 12) {
-                newDay.month = 1;
-                newDay.year++;
+        if (offset > 1) {
+            newDay.day += offset - 1;
+            while (newDay.day > getLengthOfMonth(newDay.year, newDay.month)) {
+                newDay.day -= getLengthOfMonth(newDay.year, newDay.month);
+                newDay.month++;
+                if (newDay.month > 12) {
+                    newDay.month = 1;
+                    newDay.year++;
+                }
             }
+            return newDay;
+        } else if (offset < -1) {
+            newDay.day += offset + 1;
+            while (newDay.day < 1) {
+                newDay.month--;
+                if (newDay.month < 1) {
+                    newDay.month = 12;
+                    newDay.year--;
+                }
+                newDay.day += getLengthOfMonth(newDay.year, newDay.month);
+            }
+            return newDay;
         }
-        return newDay;
+        return this;
     }
 
     @Override
@@ -127,5 +142,12 @@ public class Day implements Cloneable, Comparable<Day> {
             length = to.day - from.day + 1;
         }
         return length;
+    }
+
+    static public boolean checkOverlap(Day from1, Day to1, Day from2, Day to2) {
+        if (from1.compareTo(from2) <= 0) {
+            return to1.compareTo(from2) >= 0;
+        }
+        return to2.compareTo(from1) >= 0;
     }
 }

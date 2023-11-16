@@ -15,16 +15,6 @@ public class Team implements Comparable<Team> {
         return teamName;
     }
 
-    public String getNameAndMembers() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(teamName);
-        sb.append(" (");
-        sb.append(head.getName());
-        // TODO: Add other members
-        sb.append(")");
-        return sb.toString();
-    }
-
     @Override
     public String toString() {
         return String.format("%-15s%-10s%-13s", teamName, head.getName(), dateSetup);

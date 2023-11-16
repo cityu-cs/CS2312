@@ -9,6 +9,7 @@ public class Company {
     private ArrayList<Project> projectList;
     private ArrayList<Assignment> assignmentList;
     private ArrayList<JoinRecord> joinRecordList;
+    private ArrayList<LeaveRecord> leaveRecordList;
 
     private static Company instance = null;
 
@@ -18,6 +19,7 @@ public class Company {
         projectList = new ArrayList<>();
         assignmentList = new ArrayList<>();
         joinRecordList = new ArrayList<>();
+        leaveRecordList = new ArrayList<>();
     }
 
     public static Company getInstance() {
@@ -121,5 +123,37 @@ public class Company {
 
     public Team searchTeamByEmployee(Employee e) throws ExTeamNotFound {
         return JoinRecord.searchTeamByEmployee(joinRecordList, e);
+    }
+
+    /* LeaveRecord methods */
+
+    public void addLeaveRecord(LeaveRecord lr) {
+        leaveRecordList.add(lr);
+        Collections.sort(leaveRecordList);
+    }
+
+    public void removeLeaveRecord(LeaveRecord lr) {
+        leaveRecordList.remove(lr);
+    }
+
+    public ArrayList<LeaveRecord> searchLeaveRecordByEmployee(Employee e) {
+        return LeaveRecord.searchLeaveRecordByEmployee(leaveRecordList, e);
+    }
+
+    public void listLeaveRecordByEmployee(String name) throws ExEmployeeNotFound {
+        Employee e = searchEmployee(name);
+        LeaveRecord.listLeaveRecordByEmployee(leaveRecordList, e);
+    }
+
+    public void listAllLeaveRecords() {
+        LeaveRecord.listAllLeaveRecords(leaveRecordList, employeeList);
+    }
+
+    public LeaveRecord getOverlapLeaveRecord(Employee e, Day startDay, Day endDay) {
+        return LeaveRecord.getOverlapLeaveRecord(leaveRecordList, e, startDay, endDay);
+    }
+
+    public int getAnnualLeaveBalance(Employee e) {
+        return LeaveRecord.getAnnualLeaveBalance(leaveRecordList, e);
     }
 }

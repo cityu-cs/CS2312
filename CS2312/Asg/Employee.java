@@ -13,6 +13,10 @@ public class Employee implements Comparable<Employee> {
         return name;
     }
 
+    public int getAnnualLeaves() {
+        return annualLeaves;
+    }
+
     @Override
     public String toString() {
         return String.format("%s (Entitled Annual Leaves: %d days)", name, annualLeaves);

@@ -89,7 +89,7 @@ public class Day implements Cloneable, Comparable<Day> {
         return m % 2 == 1 ? 30 : 31; // 8, 10, 12 -> 31; 9, 11 -> 30
     }
 
-    static public int getInterval(Day from, Day to) {
+    static public int daysBetween(Day from, Day to) {
         /*
          * Calculate the length of the interval between two days, both inclusive
          */

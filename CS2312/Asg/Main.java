@@ -56,6 +56,8 @@ class Main {
 					(new CmdAssign()).execute(tokens);
 				else if (tokens[0].equals("listProjects"))
 					(new CmdListProjects()).execute(tokens);
+				else if (tokens[0].equals("suggestProjectTeam"))
+					(new CmdSuggestProjectTeam()).execute(tokens);
 				/* Leave commands */
 				else if (tokens[0].equals("takeLeave"))
 					(new CmdTakeLeave()).execute(tokens);

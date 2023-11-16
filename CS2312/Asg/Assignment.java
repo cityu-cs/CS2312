@@ -30,4 +30,19 @@ public class Assignment {
             }
         }
     }
+
+    public static double getProjectCountDuringPeriod(ArrayList<Assignment> assignmentList, Team t,
+            Day startDay, Day endDay) {
+        double projectCount = 0;
+        int totalDays = Day.daysBetween(startDay, endDay);
+        for (Assignment a : assignmentList) {
+            if (a.team.equals(t)) {
+                Day projectStartDay = a.project.getStartDay();
+                Day projectEndDay = a.project.getEndDay();
+                int overlapDays = Day.getOverlapDays(projectStartDay, projectEndDay, startDay, endDay);
+                projectCount += 1.0 * overlapDays / totalDays;
+            }
+        }
+        return projectCount;
+    }
 }

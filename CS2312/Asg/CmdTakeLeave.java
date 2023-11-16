@@ -30,8 +30,7 @@ public class CmdTakeLeave extends RecordedCommand {
             RecordedCommand.addToUndoList(this);
             RecordedCommand.clearRedoList();
             System.out.printf("Done.  %s's remaining annual leave: %d days\n", 
-                employee.getName(), 
-                company.getAnnualLeaveBalance(employee));
+                    employee.getName(), company.getAnnualLeaveBalance(employee));
 
         } catch (ExInsufficientCommandArguments e) {
             System.out.println(e.getMessage());

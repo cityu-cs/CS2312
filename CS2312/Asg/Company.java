@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Company {
-    /* Singleton */
     
     private ArrayList<Employee> employeeList;
     private ArrayList<Team> teamList;
@@ -11,6 +10,7 @@ public class Company {
     private ArrayList<EmployeeTeamRelation> EmployeeTeamRelationList;
     private ArrayList<LeaveRecord> leaveRecordList;
 
+    /* Singleton */
     private static Company instance = null;
 
     private Company() {
@@ -149,8 +149,8 @@ public class Company {
         return EmployeeTeamRelation.searchTeamByEmployee(EmployeeTeamRelationList, e);
     }
 
-    public ArrayList<EmployeeTeamRelation> searchEmployeesByTeam(Team t) {
-        return EmployeeTeamRelation.searchEmployeesByTeam(EmployeeTeamRelationList, t);
+    public ArrayList<EmployeeTeamRelation> searchEtrsByTeam(Team t) {
+        return EmployeeTeamRelation.searchEtrsByTeam(EmployeeTeamRelationList, t);
     }
 
     public String formatTeamAndMembers(Team team) {
@@ -187,5 +187,40 @@ public class Company {
 
     public int getAnnualLeaveBalance(Employee e) {
         return LeaveRecord.getAnnualLeaveBalance(leaveRecordList, e);
+    }
+
+    /* System methods */
+
+    public void suggestProjectTeam(Project project) {
+        System.out.printf("During the period of project %s (%s to %s):\n",
+                project.getProjectCode(), project.getStartDay(), project.getEndDay());
+        System.out.print("  Average manpower (m) and count of existing projects (p) of each team: \n");
+        ArrayList<Double> predictedLoadingFactorList = new ArrayList<>();
+        double minPredictedLoadingFactor = Double.MAX_VALUE;
+
+        for (int i = 0; i < teamList.size(); i++) {
+            Team t = teamList.get(i);
+            ArrayList<Employee> teamMembers = EmployeeTeamRelation.searchEmployeesByTeam(EmployeeTeamRelationList, t);
+            double p = Assignment.getProjectCountDuringPeriod(assignmentList, t, project.getStartDay(), project.getEndDay());
+            double m = LeaveRecord.getManpowerDuringPeriod(leaveRecordList, teamMembers, project.getStartDay(), project.getEndDay());
+            
+            double predictedLoadingFactor = (1.0 + p) / m;
+            predictedLoadingFactorList.add(predictedLoadingFactor);
+            if (predictedLoadingFactor < minPredictedLoadingFactor) {
+                minPredictedLoadingFactor = predictedLoadingFactor;
+            }
+
+            System.out.printf("    %s: m=%.2f workers, p=%.2f projects\n", t.getTeamName(), m, p);
+        }
+        System.out.printf("  Projected loading factor when a team takes this project %s:\n", project.getProjectCode());
+        for (int i = 0; i < teamList.size(); i++) {
+            System.out.printf("    %s: (p+1)/m = %.2f\n", teamList.get(i).getTeamName(), predictedLoadingFactorList.get(i));
+        }
+        for (int i = 0; i < teamList.size(); i++) {
+            if (predictedLoadingFactorList.get(i) == minPredictedLoadingFactor) {
+                System.out.printf("Conclusion: %s should be assigned to %s for best balancing of loading\n",
+                        project.getProjectCode(), teamList.get(i).getTeamName());
+            }
+        }
     }
 }

@@ -90,7 +90,7 @@ public class Day implements Cloneable, Comparable<Day> {
 
     /* Static methods */
 
-    static private boolean isLeapYear(int y) {
+    private static boolean isLeapYear(int y) {
         if (y % 400 == 0) {
             return true;
         }
@@ -100,7 +100,7 @@ public class Day implements Cloneable, Comparable<Day> {
         return y % 4 == 0;
     }
 
-    static private int getLengthOfMonth(int y, int m) {
+    private static int getLengthOfMonth(int y, int m) {
         if (m == 2) {
             return isLeapYear(y) ? 29 : 28;
         }
@@ -110,7 +110,7 @@ public class Day implements Cloneable, Comparable<Day> {
         return m % 2 == 1 ? 30 : 31; // 8, 10, 12 -> 31; 9, 11 -> 30
     }
 
-    static public int daysBetween(Day from, Day to) {
+    public static int daysBetween(Day from, Day to) {
         /*
          * Calculate the length of the interval between two days, both inclusive
          */
@@ -144,10 +144,40 @@ public class Day implements Cloneable, Comparable<Day> {
         return length;
     }
 
-    static public boolean checkOverlap(Day from1, Day to1, Day from2, Day to2) {
+    public static boolean checkOverlap(Day from1, Day to1, Day from2, Day to2) {
         if (from1.compareTo(from2) <= 0) {
             return to1.compareTo(from2) >= 0;
         }
         return to2.compareTo(from1) >= 0;
+    }
+
+    public static int getOverlapDays(Day from1, Day to1, Day from2, Day to2) {
+        /*
+         * 1. from1 <= from2 <= to1 <= to2, overlap = daysBetween(from2, to1)
+         * 2. from1 <= from2 <= to2 <= to1, overlap = daysBetween(from2, to2)
+         * 3. mirror of 1 + 2
+         * otherwise, overlap = 0
+         */
+        if (from1.compareTo(from2) <= 0) { // from1 <= from2
+            if (from2.compareTo(to1) <= 0) { // from1 <= from2 <= to1
+                if (to1.compareTo(to2) <= 0) { // from1 <= from2 <= to1 <= to2
+                    return daysBetween(from2, to1);
+                } else { // from1 <= from2 <= to2 < to1
+                    return daysBetween(from2, to2);
+                }
+            } else { // from1 <= to1 < from2 <= to2
+                return 0;
+            }
+        } else {
+            if (from1.compareTo(to2) <= 0) {
+                if (to2.compareTo(to1) <= 0) {
+                    return daysBetween(from1, to2);
+                } else {
+                    return daysBetween(from1, to1);
+                }
+            } else {
+                return 0;
+            }
+        }
     }
 }

@@ -11,6 +11,10 @@ public class EmployeeTeamRelation implements Comparable<EmployeeTeamRelation> {
         this.role = role;
     }
 
+    public Employee getEmployee() {
+        return employee;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -38,7 +42,7 @@ public class EmployeeTeamRelation implements Comparable<EmployeeTeamRelation> {
     /* Static methods */
 
     public static void listTeamMembers(ArrayList<EmployeeTeamRelation> EmployeeTeamRelationList, Team team) {
-        ArrayList<EmployeeTeamRelation> result = searchEmployeesByTeam(EmployeeTeamRelationList, team);
+        ArrayList<EmployeeTeamRelation> result = searchEtrsByTeam(EmployeeTeamRelationList, team);
         System.out.printf("%-10s%-10s%-13s\n", "Role", "Name", "Current / coming leaves");
         for (EmployeeTeamRelation etr : result) {
             System.out.println(etr);
@@ -54,7 +58,7 @@ public class EmployeeTeamRelation implements Comparable<EmployeeTeamRelation> {
         throw new ExTeamNotFound();
     }
 
-    public static ArrayList<EmployeeTeamRelation> searchEmployeesByTeam(ArrayList<EmployeeTeamRelation> EmployeeTeamRelationList, Team team) {
+    public static ArrayList<EmployeeTeamRelation> searchEtrsByTeam(ArrayList<EmployeeTeamRelation> EmployeeTeamRelationList, Team team) {
         ArrayList<EmployeeTeamRelation> result = new ArrayList<>();
         for (EmployeeTeamRelation etr : EmployeeTeamRelationList) {
             if (etr.team.equals(team)) {
@@ -64,12 +68,22 @@ public class EmployeeTeamRelation implements Comparable<EmployeeTeamRelation> {
         return result;
     }
 
+    public static ArrayList<Employee> searchEmployeesByTeam(ArrayList<EmployeeTeamRelation> EmployeeTeamRelationList, Team team) {
+        ArrayList<Employee> result = new ArrayList<>();
+        for (EmployeeTeamRelation etr : EmployeeTeamRelationList) {
+            if (etr.team.equals(team)) {
+                result.add(etr.employee);
+            }
+        }
+        return result;
+    }
+
     public static String formatTeamAndMembers(ArrayList<EmployeeTeamRelation> EmployeeTeamRelationList, Team team) {
         StringBuilder sb = new StringBuilder();
         sb.append(team.getTeamName()).append(" (");
-        ArrayList<EmployeeTeamRelation> result = searchEmployeesByTeam(EmployeeTeamRelationList, team);
+        ArrayList<Employee> result = searchEmployeesByTeam(EmployeeTeamRelationList, team);
         for (int i = 0; i < result.size(); i++) {
-            sb.append(result.get(i).employee.getName());
+            sb.append(result.get(i).getName());
             if (i != result.size() - 1) {
                 sb.append(", ");
             }

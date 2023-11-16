@@ -16,15 +16,19 @@ public class Project implements Comparable<Project> {
         return projectCode;
     }
 
+    public Day getStartDay() {
+        return startDay;
+    }
+
+    public Day getEndDay() {
+        return endDay;
+    }
+
     public Day getFinalStageStartDay() {
         if (Day.daysBetween(startDay, endDay) <= FINAL_STAGE_DURATION) {
             return startDay;
         }
         return endDay.advance(-FINAL_STAGE_DURATION);
-    }
-
-    public Day getFinalStageEndDay() {
-        return endDay;
     }
 
     public boolean checkLeaveOverlapWithFinalStage(Day leaveStartDay, Day leaveEndDay) {

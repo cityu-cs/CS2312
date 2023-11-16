@@ -11,6 +11,14 @@ public class LeaveRecord implements Comparable<LeaveRecord> {
         this.endDay = endDay;
     }
 
+    public Day getStartDay() {
+        return startDay;
+    }
+
+    public Day getEndDay() {
+        return endDay;
+    }
+
     @Override
     public String toString() {
         return String.format("%s to %s", startDay, endDay);
@@ -76,5 +84,22 @@ public class LeaveRecord implements Comparable<LeaveRecord> {
             }
         }
         return balance;
+    }
+
+    public static double getManpowerDuringPeriod(ArrayList<LeaveRecord> leaveRecordList,
+            ArrayList<Employee> teamMembers, Day projectStartDay, Day projectEndDay) {
+        double manpower = 0;
+        int totalDays = Day.daysBetween(projectStartDay, projectEndDay);
+        for (Employee e : teamMembers) {
+            manpower += 1.0;
+            ArrayList<LeaveRecord> result = searchLeaveRecords(leaveRecordList, e);
+            for (LeaveRecord lr : result) {
+                Day leaveStartDay = lr.startDay;
+                Day leaveEndDay = lr.endDay;
+                int overlapDays = Day.getOverlapDays(leaveStartDay, leaveEndDay, projectStartDay, projectEndDay);
+                manpower -= 1.0 * overlapDays / totalDays;
+            }
+        }
+        return manpower;
     }
 }

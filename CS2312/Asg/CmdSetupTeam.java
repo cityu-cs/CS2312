@@ -50,7 +50,7 @@ public class CmdSetupTeam extends RecordedCommand {
     @Override
     public void undoThis() {
         Company company = Company.getInstance();
-        etrList = company.searchEmployeesByTeam(t);
+        etrList = company.searchEtrsByTeam(t);
         company.removeEmployeeTeamRelations(etrList);
         company.removeTeam(t);
     }

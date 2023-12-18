@@ -1,22 +1,12 @@
-# Distributed materials
-
 Labs/*
 Lectures/*
 Assignment/*
-
-# Java class files
+Misc/*
+FinalPrep/*
 
 *.class
-
-# Testing
-
 *.out
-
-# Archives
-
 *.jar
 *.zip
 
-# Editor files
-
-CS2312/Asg/.vscode/*
+settings.json

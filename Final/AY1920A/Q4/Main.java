@@ -100,5 +100,5 @@ class Barber {
  * 
  * The Singleton pattern ensures that only one instance of the class is created.
  * 1. The constructor of Barber is private, so a new instance cannot be created outside the class. Additionally, getInstance() guarantees that only one instance is created.
- * 2. The getInstance() method is static, so it is accessible to other classes.
+ * 2. The getInstance() method is static, which provides a global point of access to the instance.
  */

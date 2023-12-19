@@ -49,7 +49,7 @@ class BudgetDecider implements Decider {
  * Part (b): Use the code to explain upcasting and dynamic binding.
  * 
  * Upcasting means treating a subclass object as a superclass object. 
- * In code, goHiking(d1) converts the WeatherDecider object d1 into a Decider object.
+ * In code, Decider d1 = new WeatherDecider() creates a WeatherDecider object and assigns it to a Decider variable d1.
  * 
  * Dynamic binding means that if a subclass overrides a superclass method, the method to be called is determined at runtime.
  * In code, goHiking(d1) calls Decider.decideHiking(). Since d1 is a WeatherDecider object, it is dynamically bound to WeatherDecider.decideHiking().

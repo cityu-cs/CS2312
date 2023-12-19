@@ -1,7 +1,5 @@
 package Final.AY1920A.Q5;
 
-import javax.swing.Icon;
-
 public class Main {
     public static void main(String [] args)  {   
         Product p1 = new Product("P001", 100); //id and price

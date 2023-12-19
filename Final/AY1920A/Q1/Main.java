@@ -58,10 +58,13 @@ class MultiValue extends Value {
  * (c) Explain upcasting and downcasting. Among S1-S7, which statement(s) involve upcasting and which statement(s) involve downcasting?
  * Using the classes Value and MultiValue, write an example involving explicit casting.
  * 
- * Upcasting means transforming a subclass object to a superclass object. This is implicit casting.
- * Downcasting means transforming a superclass object to a subclass object. This is explicit casting.
- * S2 and S3 involve upcasting, where subclass MultiValue objects are treated as superclass Value objects.
+ * Upcasting means label a subclass object variable with a superclass type.
+ * Downcasting means label a superclass object variable with a subclass type.
+ * S2 and S3 involve upcasting, where a superclass object variable (v2 and v3) refers to a subclass object (MultiValue).
  * Explicit casting example:
- * MultiValue mv1 = (MultiValue) v1;
- * It transforms the superclass Value object to a subclass MultiValue object.
+ * MultiValue mv2 = (MultiValue) v2; // This is valid because v2 refers to a MultiValue object.
+ * // This is useful when we want to use subclass-specific methods.
+ * // e.g. MultiValue.foo() { ... } Then we can't call v2.foo() because v2 is a Value object.
+ * // However we can call ((MultiValue) v2).foo() to invoke the foo() method.
+ * MultiValue mv1 = (MultiValue) v1; // This is invalid because v1 refers to a Value object. It does not contain fields of MultiValue.
  */
